@@ -1,0 +1,53 @@
+.first-section{
+    background-color: #C3ACD0;
+    padding: 8%;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+    font-style: italic;
+
+    h1{
+        font-size: 1.5rem;
+        margin-bottom: 3%;
+    }
+    .dropdown button{
+        border: 2px solid #b070d5;
+        font-size: 1.5rem;
+        width: 30%;
+        padding: 1%;
+        color: #C3ACD0;
+        font-style: italic;
+    }
+    
+    
+}
+.second-section{
+    background-color: #7743DB;
+    font-style:normal;
+    color: white;
+    padding: 5%;
+    width: 100.8%;
+
+    .col-2 {
+        p{  
+            text-align: center;
+            border: 1px solid white;
+            border-radius: 10px;
+            width: 60%;
+            padding: 1%;
+        }
+        .fb{
+            background-color: white;
+            color: #316FF6;
+        }
+        .twitter{
+            background-color: white;
+            color: #1DA1F2;
+        }
+        
+        i{
+        margin-right: 2%;
+    }
+    
+    }
+
+}

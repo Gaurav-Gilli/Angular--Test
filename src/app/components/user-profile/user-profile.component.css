@@ -1,0 +1,38 @@
+    li{
+        list-style-type: none;
+        margin-bottom: 20%;
+    }
+.main-wrapper{
+    font-family: 'PT Sans', sans-serif;
+    font-style: normal;
+    background-color: #F7EFE5;
+    padding: 10%;
+    padding-left: 25%;
+    
+
+    img{
+        width: 310px;
+        height: 325px;
+    }
+    .edit{
+        text-align: center;
+    }
+
+}
+.main{
+    width: 70%;
+    font-style: italic;
+
+    .photo-section{
+        text-align: center;
+        img{
+            margin-bottom: 5%;
+        }
+    }
+    p{
+        margin-bottom: 5%;
+    }
+    
+    
+
+}

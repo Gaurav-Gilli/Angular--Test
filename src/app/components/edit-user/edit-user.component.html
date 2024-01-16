@@ -1,0 +1,103 @@
+<div class="container-fluid main">
+  <div class="top-bar row">
+    <div class="col-10">
+      Register
+    </div>
+    <div class="col-2">
+      <button class="btn ">Close</button>
+    </div>
+    </div>
+  <div *ngIf="message" class="alert alert-success" role="alert">
+    User Updated
+  </div>
+  <form [formGroup]="editUser" (ngSubmit)="UpdateData()" class="row g-2">
+    <div class="col-md-6">
+      <label  class="form-label">First name</label>
+      <input type="text" class="form-control "   required formControlName="firstName">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Last name</label>
+      <input type="text" class="form-control "  required formControlName="lastName">
+    </div>
+    <div class="col-md-5">
+      <label class="form-label">Email</label>
+      <input type="text" class="form-control "  required formControlName="email">
+    </div>
+    <div class="col-md-3">
+      <label for="validationServer04" class="form-label" >State</label>
+      <select class="form-select"  aria-describedby="validationServer04Feedback" required formControlName="location">
+        <option selected disabled value="">Choose...</option>
+        <option>India</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label  class="form-label">Number</label>
+      <input type="text" class="form-control "   required formControlName="number">
+    </div>
+    <div class="col-md-3">
+      <label  class="form-label">Address</label>
+      <select id="addressType" class="form-select" required formControlName="addressType">
+        <option disabled value="">Select an address type</option>
+        <option value="home">Home Address</option>
+        <option value="company">Company Address</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label  class="form-label">Age</label>
+      <input type="text" class="form-control "   required formControlName="age">
+    </div>
+    <div *ngIf="getFormControl('addressType')?.value === 'home'">
+    <div class="col-md-12">
+      <label  class="form-label">Address 1</label>
+      <input type="text" id="homeAddress" class="form-control"  required formControlName="address1">
+    </div>
+    <div class="col-md-12">
+      <label  class="form-label">Address 2</label>
+      <input type="text" id="homeAddress" class="form-control "  required formControlName="address2">
+    </div>
+    </div>
+    <div *ngIf="getFormControl('addressType')?.value === 'company'">
+    <div class="col-md-12">
+      <label  class="form-label">Company Address 1</label>
+      <input type="text" id="companyAddress" class="form-control "  required formControlName="companyAddress1">
+    </div>
+    <div class="col-md-12">
+      <label  class="form-label">Company Address 2</label>
+      <input type="text" id="companyAddress" class="form-control "   required formControlName="companyAddress2">
+    </div>
+    </div>
+    <div class="col-md-12">
+      <label for="hobbiesInput">Hobbies:</label>
+  <input type="text" id="hobbiesInput" formControlName="hobbiesInput">
+  <button type="button" (click)="addHobby()">Add Hobby</button>
+
+  <div *ngIf="hobbies.length > 0">
+    <p>Selected Hobbies:</p>
+    <ul>
+      <li *ngFor="let hobby of hobbies; let i = index">
+        {{ hobby }} 
+        <button  type="button" (click)="removeHobby(i)">Remove</button>
+      </li>
+    </ul>
+  </div>
+    </div>
+    <div class="col-md-12">
+      <label  class="form-label">Profile Image</label>
+      <input type="text"  class="form-control "  placeholder="Image(Url)" required formControlName="image">
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input " type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+        <label class="form-check-label" for="invalidCheck3">
+          Agree to terms and conditions
+        </label>
+        <div id="invalidCheck3Feedback" class="invalid-feedback">
+          You must agree before submitting.
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <button  class="btn btn-primary" type="submit" [disabled]="isSubmitDisabled()">Submit form</button>
+    </div>
+  </form>
+</div>
