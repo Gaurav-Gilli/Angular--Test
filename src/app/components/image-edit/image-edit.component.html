@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="container-fluid main">
+  <h1>Current Profile Pic</h1>
+  <div  *ngIf="userData">
+    <img src="{{userData.image}}" alt="" srcset="">
+  </div>
+  <form [formGroup]="editPhoto" (ngSubmit)="UpdateData()" class="row g-2">
+    <div class="col-md-12">
+      <label for="image" class="form-label">Profile Image:</label>
+      <input type="file" id="image" name="image" class="form-control" (change)="onImageChange($event)" formControlName="image">
+      <div *ngIf="editPhoto.controls['image'].invalid && (editPhoto.controls['image'].dirty || editPhoto.controls['image'].touched)">
+        <small class="text-danger">Please upload a valid Image.</small>
+      </div>
+    </div>
+    <div class="col-12">
+      <button  class="btn btn-primary"  type="submit" [disabled]="!isFormValid()" >Submit form</button>
+    </div>
+    <div *ngIf="message" class="alert alert-success" role="alert">
+      Profile Picture Updated, Refresh the Page or Check it out here! <button class="btn btn-success" routerLink="/profile">Registered Users</button>
+    </div>
+  </form>
+</div>

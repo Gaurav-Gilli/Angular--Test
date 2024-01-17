@@ -1,103 +1,120 @@
-<div class="container-fluid main">
-  <div class="top-bar row">
-    <div class="col-10">
-      Register
-    </div>
-    <div class="col-2">
-      <button class="btn ">Close</button>
-    </div>
-    </div>
-  <div *ngIf="message" class="alert alert-success" role="alert">
-    User Updated
-  </div>
-  <form [formGroup]="editUser" (ngSubmit)="UpdateData()" class="row g-2">
-    <div class="col-md-6">
-      <label  class="form-label">First name</label>
-      <input type="text" class="form-control "   required formControlName="firstName">
-    </div>
-    <div class="col-md-6">
-      <label class="form-label">Last name</label>
-      <input type="text" class="form-control "  required formControlName="lastName">
-    </div>
-    <div class="col-md-5">
-      <label class="form-label">Email</label>
-      <input type="text" class="form-control "  required formControlName="email">
-    </div>
-    <div class="col-md-3">
-      <label for="validationServer04" class="form-label" >State</label>
-      <select class="form-select"  aria-describedby="validationServer04Feedback" required formControlName="location">
-        <option selected disabled value="">Choose...</option>
-        <option>India</option>
-      </select>
-    </div>
-    <div class="col-md-4">
-      <label  class="form-label">Number</label>
-      <input type="text" class="form-control "   required formControlName="number">
-    </div>
-    <div class="col-md-3">
-      <label  class="form-label">Address</label>
-      <select id="addressType" class="form-select" required formControlName="addressType">
-        <option disabled value="">Select an address type</option>
-        <option value="home">Home Address</option>
-        <option value="company">Company Address</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <label  class="form-label">Age</label>
-      <input type="text" class="form-control "   required formControlName="age">
-    </div>
-    <div *ngIf="getFormControl('addressType')?.value === 'home'">
-    <div class="col-md-12">
-      <label  class="form-label">Address 1</label>
-      <input type="text" id="homeAddress" class="form-control"  required formControlName="address1">
-    </div>
-    <div class="col-md-12">
-      <label  class="form-label">Address 2</label>
-      <input type="text" id="homeAddress" class="form-control "  required formControlName="address2">
-    </div>
-    </div>
-    <div *ngIf="getFormControl('addressType')?.value === 'company'">
-    <div class="col-md-12">
-      <label  class="form-label">Company Address 1</label>
-      <input type="text" id="companyAddress" class="form-control "  required formControlName="companyAddress1">
-    </div>
-    <div class="col-md-12">
-      <label  class="form-label">Company Address 2</label>
-      <input type="text" id="companyAddress" class="form-control "   required formControlName="companyAddress2">
-    </div>
-    </div>
-    <div class="col-md-12">
-      <label for="hobbiesInput">Hobbies:</label>
-  <input type="text" id="hobbiesInput" formControlName="hobbiesInput">
-  <button type="button" (click)="addHobby()">Add Hobby</button>
-
-  <div *ngIf="hobbies.length > 0">
-    <p>Selected Hobbies:</p>
-    <ul>
-      <li *ngFor="let hobby of hobbies; let i = index">
-        {{ hobby }} 
-        <button  type="button" (click)="removeHobby(i)">Remove</button>
-      </li>
-    </ul>
-  </div>
-    </div>
-    <div class="col-md-12">
-      <label  class="form-label">Profile Image</label>
-      <input type="text"  class="form-control "  placeholder="Image(Url)" required formControlName="image">
-    </div>
-    <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input " type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-        <label class="form-check-label" for="invalidCheck3">
-          Agree to terms and conditions
-        </label>
-        <div id="invalidCheck3Feedback" class="invalid-feedback">
-          You must agree before submitting.
+<div class="wrapper">
+  <div class="container-fluid main">
+    <div class="top-bar row">
+      <div class="col-10">
+        Edit Profile
+      </div>
+      </div>
+    <form [formGroup]="editUser" (ngSubmit)="UpdateData()"  class="row g-2">
+      <div class="col-md-6">
+        <label  class="form-label">First name</label>
+        <input type="text" class="form-control "   required formControlName="firstName">
+        <div *ngIf="editUser.controls['firstName'].invalid && (editUser.controls['firstName'].dirty || editUser.controls['firstName'].touched)">
+          <small class="text-danger">Please enter a valid first name.</small>
         </div>
       </div>
+      <div class="col-md-6">
+        <label class="form-label">Last name</label>
+        <input type="text" class="form-control "  required formControlName="lastName">
+        <div *ngIf="editUser.controls['lastName'].invalid && (editUser.controls['lastName'].dirty || editUser.controls['lastName'].touched)">
+          <small class="text-danger">Please enter a valid last name.</small>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control "  required formControlName="email">
+        <div *ngIf="editUser.controls['email'].invalid && (editUser.controls['email'].dirty || editUser.controls['email'].touched)">
+          <small class="text-danger">Please enter a valid Email Address.</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="validationServer04" class="form-label" >State</label>
+        <select class="form-select"  aria-describedby="validationServer04Feedback" required formControlName="location">
+          <option selected disabled value="">Choose...</option>
+          <option>India</option>
+        </select>
+        <div *ngIf="editUser.controls['location'].invalid && (editUser.controls['location'].dirty || editUser.controls['location'].touched)">
+          <small class="text-danger">Please enter a valid Location.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label  class="form-label">Number</label>
+        <input type="text" class="form-control "   required formControlName="number">
+        <div *ngIf="editUser.controls['number'].invalid && (editUser.controls['number'].dirty || editUser.controls['number'].touched)">
+          <small class="text-danger">Please enter a valid Number.</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label  class="form-label">Address</label>
+        <select id="addressType" class="form-select" required formControlName="addressType">
+          <option disabled value="">Select an address type</option>
+          <option value="home">Home Address</option>
+          <option value="company">Company Address</option>
+        </select>
+        <div *ngIf="editUser.controls['addressType'].invalid && (editUser.controls['addressType'].dirty || editUser.controls['addressType'].touched)">
+          <small class="text-danger">Please enter a valid address type.</small>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label  class="form-label">Age</label>
+        <input type="text" class="form-control "   required formControlName="age">
+        <div *ngIf="editUser.controls['age'].invalid && (editUser.controls['age'].dirty || editUser.controls['age'].touched)">
+          <small class="text-danger">Please enter a valid Age.</small>
+        </div>
+      </div>
+      <div *ngIf="getFormControl('addressType')?.value === 'home'">
+      <div class="col-md-12">
+        <label  class="form-label">Address 1</label>
+        <input type="text" id="homeAddress" class="form-control"  required formControlName="address1">
+        <div *ngIf="editUser.controls['address1'].invalid && (editUser.controls['address1'].dirty || editUser.controls['address1'].touched)">
+          <small class="text-danger">Please enter a valid Address.</small>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label  class="form-label">Address 2</label>
+        <input type="text" id="homeAddress" class="form-control "  required formControlName="address2">
+        <div *ngIf="editUser.controls['address2'].invalid && (editUser.controls['address2'].dirty || editUser.controls['address2'].touched)">
+          <small class="text-danger">Please enter a valid Address.</small>
+        </div>
+      </div>
+      </div>
+      <div *ngIf="getFormControl('addressType')?.value === 'company'">
+      <div class="col-md-12">
+        <label  class="form-label">Company Address 1</label>
+        <input type="text" id="companyAddress" class="form-control "  required formControlName="companyAddress1">
+        <div *ngIf="editUser.controls['companyAddress1'].invalid && (editUser.controls['companyAddress1'].dirty || editUser.controls['companyAddress1'].touched)">
+          <small class="text-danger">Please enter a valid Company Address.</small>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label  class="form-label">Company Address 2</label>
+        <input type="text" id="companyAddress" class="form-control "   required formControlName="companyAddress2">
+        <div *ngIf="editUser.controls['companyAddress2'].invalid && (editUser.controls['companyAddress2'].dirty || editUser.controls['companyAddress2'].touched)">
+          <small class="text-danger">Please enter a valid Company Address.</small>
+        </div>
+      </div>
+      </div>
+      <div class="col-md-12">
+        <label for="hobbiesInput">Hobbies:</label>
+    <input type="text" id="hobbiesInput" formControlName="hobbiesInput">
+    <button type="button" (click)="addHobby()">Add Hobby</button>
+  
+    <div *ngIf="hobbies.length > 0">
+      <p>Selected Hobbies:</p>
+      <ul>
+        <li *ngFor="let hobby of hobbies; let i = index">
+          {{ hobby }} 
+          <button  type="button" (click)="removeHobby(i)">Remove</button>
+        </li>
+      </ul>
     </div>
-    <div class="col-12">
-      <button  class="btn btn-primary" type="submit" [disabled]="isSubmitDisabled()">Submit form</button>
+      </div>
+      <div class="col-12">
+        <button  class="btn btn-primary"  type="submit" [disabled]="!isFormValid()" >Submit form</button>
+      </div>
+    </form>
+    <div *ngIf="message" class="alert alert-success" role="alert">
+      User Info Updated Check it out here <button class="btn btn-success" routerLink="/profile">Registered Users</button>
     </div>
-  </form>
-</div>
+  </div>
+  </div>

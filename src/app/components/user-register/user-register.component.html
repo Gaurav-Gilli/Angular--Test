@@ -9,18 +9,27 @@
   <div *ngIf="message" class="alert alert-success" role="alert">
     User Registered Check it out here <button class="btn btn-success" routerLink="/profile">Registered Users</button>
   </div>
-  <form [formGroup]="addUser" (ngSubmit)="SaveData()" class="row g-2">
+  <form [formGroup]="addUser" (ngSubmit)="SaveData()"  class="row g-2">
     <div class="col-md-6">
       <label  class="form-label">First name</label>
       <input type="text" class="form-control "   required formControlName="firstName">
+      <div *ngIf="addUser.controls['firstName'].invalid && (addUser.controls['firstName'].dirty || addUser.controls['firstName'].touched)">
+        <small class="text-danger">Please enter a valid first name.</small>
+      </div>
     </div>
     <div class="col-md-6">
       <label class="form-label">Last name</label>
       <input type="text" class="form-control "  required formControlName="lastName">
+      <div *ngIf="addUser.controls['lastName'].invalid && (addUser.controls['lastName'].dirty || addUser.controls['lastName'].touched)">
+        <small class="text-danger">Please enter a valid last name.</small>
+      </div>
     </div>
     <div class="col-md-5">
       <label class="form-label">Email</label>
       <input type="text" class="form-control "  required formControlName="email">
+      <div *ngIf="addUser.controls['email'].invalid && (addUser.controls['email'].dirty || addUser.controls['email'].touched)">
+        <small class="text-danger">Please enter a valid Email Address.</small>
+      </div>
     </div>
     <div class="col-md-3">
       <label for="validationServer04" class="form-label" >State</label>
@@ -28,10 +37,16 @@
         <option selected disabled value="">Choose...</option>
         <option>India</option>
       </select>
+      <div *ngIf="addUser.controls['location'].invalid && (addUser.controls['location'].dirty || addUser.controls['location'].touched)">
+        <small class="text-danger">Please enter a valid Location.</small>
+      </div>
     </div>
     <div class="col-md-4">
       <label  class="form-label">Number</label>
       <input type="text" class="form-control "   required formControlName="number">
+      <div *ngIf="addUser.controls['number'].invalid && (addUser.controls['number'].dirty || addUser.controls['number'].touched)">
+        <small class="text-danger">Please enter a valid Number.</small>
+      </div>
     </div>
     <div class="col-md-3">
       <label  class="form-label">Address</label>
@@ -40,29 +55,47 @@
         <option value="home">Home Address</option>
         <option value="company">Company Address</option>
       </select>
+      <div *ngIf="addUser.controls['addressType'].invalid && (addUser.controls['addressType'].dirty || addUser.controls['addressType'].touched)">
+        <small class="text-danger">Please enter a valid address type.</small>
+      </div>
     </div>
     <div class="col-md-2">
       <label  class="form-label">Age</label>
       <input type="text" class="form-control "   required formControlName="age">
+      <div *ngIf="addUser.controls['age'].invalid && (addUser.controls['age'].dirty || addUser.controls['age'].touched)">
+        <small class="text-danger">Please enter a valid Age.</small>
+      </div>
     </div>
     <div *ngIf="getFormControl('addressType')?.value === 'home'">
     <div class="col-md-12">
       <label  class="form-label">Address 1</label>
       <input type="text" id="homeAddress" class="form-control"  required formControlName="address1">
+      <div *ngIf="addUser.controls['address1'].invalid && (addUser.controls['address1'].dirty || addUser.controls['address1'].touched)">
+        <small class="text-danger">Please enter a valid Address.</small>
+      </div>
     </div>
     <div class="col-md-12">
       <label  class="form-label">Address 2</label>
       <input type="text" id="homeAddress" class="form-control "  required formControlName="address2">
+      <div *ngIf="addUser.controls['address2'].invalid && (addUser.controls['address2'].dirty || addUser.controls['address2'].touched)">
+        <small class="text-danger">Please enter a valid Address.</small>
+      </div>
     </div>
     </div>
     <div *ngIf="getFormControl('addressType')?.value === 'company'">
     <div class="col-md-12">
       <label  class="form-label">Company Address 1</label>
       <input type="text" id="companyAddress" class="form-control "  required formControlName="companyAddress1">
+      <div *ngIf="addUser.controls['companyAddress1'].invalid && (addUser.controls['companyAddress1'].dirty || addUser.controls['companyAddress1'].touched)">
+        <small class="text-danger">Please enter a valid Company Address.</small>
+      </div>
     </div>
     <div class="col-md-12">
       <label  class="form-label">Company Address 2</label>
       <input type="text" id="companyAddress" class="form-control "   required formControlName="companyAddress2">
+      <div *ngIf="addUser.controls['companyAddress2'].invalid && (addUser.controls['companyAddress2'].dirty || addUser.controls['companyAddress2'].touched)">
+        <small class="text-danger">Please enter a valid Company Address.</small>
+      </div>
     </div>
     </div>
     <div class="col-md-12">
@@ -79,13 +112,23 @@
       </li>
     </ul>
   </div>
-  <div class="col-md-12">
+  <!-- <div class="col-md-12">
     <label  class="form-label">Profile Image</label>
     <input type="text"  class="form-control "  placeholder="Image(URL)" required formControlName="image">
-  </div>
+    <div *ngIf="addUser.controls['image'].invalid && (addUser.controls['image'].dirty || addUser.controls['image'].touched)">
+      <small class="text-danger">Please enter a valid Image URL.</small>
+    </div>
+  </div> -->
+    </div>
+    <div class="col-md-12">
+      <label for="image" class="form-label">Profile Image:</label>
+      <input type="file" id="image" name="image" class="form-control" (change)="onImageChange($event)" formControlName="image">
+      <div *ngIf="addUser.controls['image'].invalid && (addUser.controls['image'].dirty || addUser.controls['image'].touched)">
+        <small class="text-danger">Please upload a valid Image.</small>
+      </div>
     </div>
     <div class="col-12">
-      <button  class="btn btn-primary"  type="submit" [disabled]="isSubmitDisabled()" >Submit form</button>
+      <button  class="btn btn-primary"  type="submit" [disabled]="!isFormValid()" >Submit form</button>
     </div>
   </form>
   <div *ngIf="!isvalid" class="alert alert-warning" role="alert">
@@ -93,3 +136,4 @@
   </div>
 </div>
 </div>
+<!-- isSubmitDisabled() -->

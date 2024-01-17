@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
   this.dataservice.getUserById(this.router.snapshot.params.id).subscribe((x)=>{
     console.log(x);
     this.editUser = this.fb.group({
-      addressType: [''],
+      addressType: x['addressType'],
       firstName: x['firstName'],
       lastName: x['lastName'],
       email: x['email'],
@@ -75,7 +75,7 @@ export class EditUserComponent implements OnInit {
     this.editUser.get('address2').updateValueAndValidity();
     this.editUser.get('companyAddress1').updateValueAndValidity();
     this.editUser.get('companyAddress2').updateValueAndValidity();
-  });};
+  });};     
   SaveData(){
     this.editUser.get('hobbiesInput').setValue(this.hobbies.join(', '));
     this.dataservice.saveUserData(this.editUser.value).subscribe((result)=>{
@@ -84,7 +84,7 @@ export class EditUserComponent implements OnInit {
     this.message = true;
   }
   UpdateData(){
-    this.dataservice.updateStudentData(this.router.snapshot.params.id,this.editUser.value).subscribe((x)=>{
+    this.dataservice.updateUserData(this.router.snapshot.params.id,this.editUser.value).subscribe((x)=>{
       console.log(x)
     })
     this.message= true;

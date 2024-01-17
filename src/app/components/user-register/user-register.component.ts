@@ -28,7 +28,7 @@ export class UserRegisterComponent implements OnInit {
       age:['',[Validators.required, Validators.pattern('^[0-9]+$')]],
       number:['',[Validators.required, Validators.pattern('^[0-9]+$')]],
       location:['',Validators.required],
-      image:['']
+      image:[null,[Validators.required]]
 
   })
   this.addUser.get('addressType').valueChanges.subscribe(addressType => {
@@ -57,20 +57,32 @@ export class UserRegisterComponent implements OnInit {
 
 };
   SaveData(){
-    this.addUser.get('hobbiesInput').setValue(this.hobbies.join(', '));
-    this.dataservice.saveUserData(this.addUser.value).subscribe((result)=>{
-      console.log(result);
-    })
+    if(this.isFormValid()){
+      this.addUser.get('hobbiesInput').setValue(this.hobbies.join(', '));
+      this.dataservice.saveUserData(this.addUser.value).subscribe((result)=>{
+        console.log(result);
+      })
     this.message = true;
+  }
+    }
+  onImageChange(event: any): void {
+    const file = event.target.files[0];
+    this.convertImageToBase64(file);
+  }
+  convertImageToBase64(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.addUser.patchValue({ image: e.target.result });
+    };
+    reader.readAsDataURL(file);
+  }
+    
+  isFormValid():boolean{
+    return this.addUser.valid;
   }
   getFormControl(controlName: string) {
     return this.addUser.get(controlName);
   }
-  isSubmitDisabled() {
-    // Check if the form is valid
-    return this.addUser.invalid;
-  }
-
   addHobby() {
     const hobby = this.addUser.get('hobbiesInput').value;
 

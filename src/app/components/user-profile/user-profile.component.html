@@ -6,7 +6,7 @@
                 <div class="col-6 photo-section">
                     <img src="{{items.image}}" alt="Profile pic" srcset="">
                     <div class="edit">
-                        <div><button class="btn btn-secondary" routerLink="/edit/{{items.id}}">Edit Profile</button></div>
+                        <div><button class="btn btn-secondary" routerLink="/image-edit/{{items.id}}">Edit Photo</button></div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -17,6 +17,7 @@
                     <p>I live in the country of {{items.location}} at {{items.address1}}{{items.companyAddress1}} {{companyAddress2}}{{items.address2}}.</p>
                     <p>Things that I like to do are {{items.hobbiesInput}},And please send me Newsletters. Please reach out to my number:{{items.number}}</p>
                     <button class="btn btn-success">I agree</button>
+                    <button class="btn btn-secondary" routerLink="/edit/{{items.id}}">Edit Profile</button>
                 </div>
             </div>
         </li>

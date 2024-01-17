@@ -32,7 +32,8 @@ export class DataServiceService {
   getUserById(id:any){
     return this.http.get(`${this.url}/${id}`)
   }
-  updateStudentData(id:any,data:any){
+  updateUserData(id:any,data:any){
     return this.http.put(`${this.url}/${id}`,data)
   }
+
 }

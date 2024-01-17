@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { ImageEditComponent } from './components/image-edit/image-edit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
-    EditUserComponent
+    EditUserComponent,
+    ImageEditComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,10 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
       {
         path:"edit/:id",
         component:EditUserComponent
+      },
+      {
+        path:"image-edit/:id",
+        component:ImageEditComponent
       },
       {
         path:"profile",
